@@ -220,7 +220,7 @@ public class frmInversionGBM extends javax.swing.JFrame {
          NumberFormat formatoImporte = NumberFormat.getCurrencyInstance();
         // validamos que no esten vacios los campos
         
-        double interes = 0.875;
+        double interes = 0.90;
         int meses = 12;
         int dias = 30;
         
