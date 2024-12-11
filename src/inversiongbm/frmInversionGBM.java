@@ -138,7 +138,7 @@ public class frmInversionGBM extends javax.swing.JFrame {
         lblCantidad.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblCantidad.setText("--");
 
-        txtInteres.setText("0.875");
+        txtInteres.setText("0.825");
         txtInteres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtInteresActionPerformed(evt);
