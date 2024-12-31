@@ -42,10 +42,12 @@ public class frmInversionGBM extends javax.swing.JFrame {
                 }
                 
             }else{
-                System.out.println("El archivo no esta listo para ser leido...");
+                //System.out.println("El archivo no esta listo para ser leido...");
+                JOptionPane.showMessageDialog(null, "El archivo no esta listo para ser leido...");
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "El archivo no esta listo para ser leido...");
         }
         
 
@@ -77,9 +79,11 @@ public class frmInversionGBM extends javax.swing.JFrame {
         txtInteres = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         cmdCambiarInteres = new javax.swing.JButton();
+        cmdManual = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Inversion GBM+");
+        setResizable(false);
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 formKeyPressed(evt);
@@ -169,6 +173,7 @@ public class frmInversionGBM extends javax.swing.JFrame {
         lblCantidad.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblCantidad.setText("--");
 
+        txtInteres.setEditable(false);
         txtInteres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtInteresActionPerformed(evt);
@@ -182,10 +187,17 @@ public class frmInversionGBM extends javax.swing.JFrame {
 
         jLabel6.setText("Interes");
 
-        cmdCambiarInteres.setText("Cambiar");
+        cmdCambiarInteres.setText("Cambiar en BD");
         cmdCambiarInteres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdCambiarInteresActionPerformed(evt);
+            }
+        });
+
+        cmdManual.setText("Manual");
+        cmdManual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdManualActionPerformed(evt);
             }
         });
 
@@ -218,18 +230,24 @@ public class frmInversionGBM extends javax.swing.JFrame {
                         .addComponent(cmdCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(53, 53, 53)
+                                        .addComponent(cmdManual, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblCantidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addComponent(cmdSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(5, 5, 5)
-                                .addComponent(txtInteres, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtInteres, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(cmdCambiarInteres)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblCantidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cmdSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(cmdCambiarInteres, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(109, 109, 109)
@@ -262,11 +280,17 @@ public class frmInversionGBM extends javax.swing.JFrame {
                     .addComponent(txtInteres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
                     .addComponent(cmdCambiarInteres))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmdSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                        .addComponent(cmdSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmdManual)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(11, Short.MAX_VALUE))))
         );
 
         lblCantidad.getAccessibleContext().setAccessibleName("lblCantidad");
@@ -469,6 +493,18 @@ public class frmInversionGBM extends javax.swing.JFrame {
   
     }//GEN-LAST:event_cmdCambiarInteresActionPerformed
 
+    private void cmdManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdManualActionPerformed
+        // Boton de cambio manual de interes
+        
+                    double cantidad = Float.parseFloat(JOptionPane.showInputDialog("Digite el Interes Mensual"));
+            //escritor.println(cantidad/10);
+            
+            //archivo.close();
+            
+                    txtInteres.setText(String.valueOf(cantidad/10));
+                    txtCantidad.requestFocus();
+    }//GEN-LAST:event_cmdManualActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -508,6 +544,7 @@ public class frmInversionGBM extends javax.swing.JFrame {
     private javax.swing.JButton cmdCalcular;
     private javax.swing.JButton cmdCambiarInteres;
     private javax.swing.JButton cmdLimpiar;
+    private javax.swing.JButton cmdManual;
     private javax.swing.JButton cmdSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
