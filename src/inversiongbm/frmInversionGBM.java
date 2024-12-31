@@ -6,6 +6,10 @@ package inversiongbm;
 //hola desde la mac
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.text.NumberFormat;
 import javax.swing.JOptionPane;
 
@@ -20,6 +24,32 @@ public class frmInversionGBM extends javax.swing.JFrame {
      */
     public frmInversionGBM() {
         initComponents();
+        
+        
+              FileReader archivo;
+        BufferedReader lector;
+        
+        try {
+            archivo = new FileReader("C:/interes.txt");
+            if (archivo.ready()) {
+                lector = new BufferedReader(archivo);
+                String cadena;
+                while ((cadena = lector.readLine())!=null) {
+                
+                    //System.out.println(cadena);
+                    txtInteres.setText(cadena);
+                    txtCantidad.requestFocus();
+                }
+                
+            }else{
+                System.out.println("El archivo no esta listo para ser leido...");
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        
+
+        
     }
 
     /**
@@ -46,6 +76,7 @@ public class frmInversionGBM extends javax.swing.JFrame {
         lblCantidad = new javax.swing.JLabel();
         txtInteres = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
+        cmdCambiarInteres = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Inversion GBM+");
@@ -138,7 +169,6 @@ public class frmInversionGBM extends javax.swing.JFrame {
         lblCantidad.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblCantidad.setText("--");
 
-        txtInteres.setText("0.825");
         txtInteres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtInteresActionPerformed(evt);
@@ -151,6 +181,13 @@ public class frmInversionGBM extends javax.swing.JFrame {
         });
 
         jLabel6.setText("Interes");
+
+        cmdCambiarInteres.setText("Cambiar");
+        cmdCambiarInteres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdCambiarInteresActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -185,7 +222,9 @@ public class frmInversionGBM extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(5, 5, 5)
-                                .addComponent(txtInteres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtInteres, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cmdCambiarInteres)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblCantidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -221,8 +260,9 @@ public class frmInversionGBM extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtInteres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                    .addComponent(jLabel6)
+                    .addComponent(cmdCambiarInteres))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmdSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -405,6 +445,30 @@ public class frmInversionGBM extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtInteresKeyTyped
 
+    private void cmdCambiarInteresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCambiarInteresActionPerformed
+        // Boton de Cambiar Interes
+        FileWriter archivo = null;
+        PrintWriter escritor = null;
+        
+        try {
+            archivo = new FileWriter("C:/interes.txt");
+            escritor = new PrintWriter(archivo);
+            
+            double cantidad = Float.parseFloat(JOptionPane.showInputDialog("Digite el Interes Mensual"));
+            escritor.println(cantidad/10);
+            
+            archivo.close();
+            
+                    txtInteres.setText(String.valueOf(cantidad/10));
+                    txtCantidad.requestFocus();
+            
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        
+  
+    }//GEN-LAST:event_cmdCambiarInteresActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -442,6 +506,7 @@ public class frmInversionGBM extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdCalcular;
+    private javax.swing.JButton cmdCambiarInteres;
     private javax.swing.JButton cmdLimpiar;
     private javax.swing.JButton cmdSalir;
     private javax.swing.JLabel jLabel1;
