@@ -26,26 +26,45 @@ public class frmInversionGBM extends javax.swing.JFrame {
         initComponents();
         
         
-              FileReader archivo;
+        FileReader archivo;
+        FileReader archivoMac;
+        
         BufferedReader lector;
+        BufferedReader lector2;
         
         try {
-            archivo = new FileReader("/interes.txt");
-            //archivo = new FileReader("C:/interes.txt"); linux
+            
+            archivo = new FileReader("C:/interes.txt");
+            archivoMac = new FileReader("/interes.txt");
+            //archivo = new FileReader("/interes.txt"); linux
             if (archivo.ready()) {
                 lector = new BufferedReader(archivo);
                 String cadena;
+                
                 while ((cadena = lector.readLine())!=null) {
                 
                     //System.out.println(cadena);
                     txtInteres.setText(cadena);
-                    txtCantidad.requestFocus();
+                    txtCantidad.requestFocus();      
+                }
+            }else if(archivoMac.ready()){
+                lector2 = new BufferedReader(archivoMac);
+                String cadena;
+                
+                while ((cadena = lector2.readLine())!=null) {
+                
+                    //System.out.println(cadena);
+                    txtInteres.setText(cadena);
+                    txtCantidad.requestFocus();      
                 }
                 
-            }else{
+            }
+            else{
                 //System.out.println("El archivo no esta listo para ser leido...");
                 JOptionPane.showMessageDialog(null, "El archivo no esta listo para ser leido...");
             }
+            
+            
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             JOptionPane.showMessageDialog(null, "El archivo no esta listo para ser leido...");
@@ -476,8 +495,8 @@ public class frmInversionGBM extends javax.swing.JFrame {
         PrintWriter escritor = null;
         
         try {
-            archivo = new FileWriter("/interes.txt");
-            //archivo = new FileWriter("C:/interes.txt"); linux
+            archivo = new FileWriter("C:/interes.txt");
+            //archivo = new FileWriter("/interes.txt"); linux
             escritor = new PrintWriter(archivo);
             
             double cantidad = Float.parseFloat(JOptionPane.showInputDialog("Digite el Interes Mensual"));
