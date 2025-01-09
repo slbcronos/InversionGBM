@@ -145,6 +145,7 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="cmdSalir">
       <Properties>
+        <Property name="mnemonic" type="int" value="83"/>
         <Property name="text" type="java.lang.String" value="Salir"/>
       </Properties>
       <Events>
@@ -153,6 +154,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="cmdCalcular">
       <Properties>
+        <Property name="mnemonic" type="int" value="67"/>
         <Property name="text" type="java.lang.String" value="Calcular"/>
         <Property name="toolTipText" type="java.lang.String" value="Calcular Inversion"/>
       </Properties>
@@ -162,6 +164,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="cmdLimpiar">
       <Properties>
+        <Property name="mnemonic" type="int" value="76"/>
         <Property name="text" type="java.lang.String" value="Limpiar"/>
       </Properties>
       <Events>
@@ -259,6 +262,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="cmdCambiarInteres">
       <Properties>
+        <Property name="mnemonic" type="int" value="66"/>
         <Property name="text" type="java.lang.String" value="Cambiar en BD"/>
       </Properties>
       <Events>
@@ -267,6 +271,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="cmdManual">
       <Properties>
+        <Property name="mnemonic" type="int" value="77"/>
         <Property name="text" type="java.lang.String" value="Manual"/>
       </Properties>
       <Events>

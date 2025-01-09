@@ -4,6 +4,7 @@
  */
 package inversiongbm;
 //hola desde la mac
+
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
@@ -12,6 +13,7 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.text.NumberFormat;
 import javax.swing.JOptionPane;
+import java.awt.HeadlessException;
 
 /**
  *
@@ -24,54 +26,52 @@ public class frmInversionGBM extends javax.swing.JFrame {
      */
     public frmInversionGBM() {
         initComponents();
-        
-        
+
         FileReader archivo;
         FileReader archivoMac;
-        
+
         BufferedReader lector;
         BufferedReader lector2;
-        
+
         try {
-            
+
             archivo = new FileReader("C:/interes.txt");
             archivoMac = new FileReader("/interes.txt");
             //archivo = new FileReader("/interes.txt"); linux
             if (archivo.ready()) {
                 lector = new BufferedReader(archivo);
                 String cadena;
-                
-                while ((cadena = lector.readLine())!=null) {
-                
+
+                while ((cadena = lector.readLine()) != null) {
+
                     //System.out.println(cadena);
                     txtInteres.setText(cadena);
-                    txtCantidad.requestFocus();      
+                    txtCantidad.requestFocus();
                 }
-            }else if(archivoMac.ready()){
+            } else if (archivoMac.ready()) {
                 lector2 = new BufferedReader(archivoMac);
                 String cadena;
-                
-                while ((cadena = lector2.readLine())!=null) {
-                
+
+                while ((cadena = lector2.readLine()) != null) {
+
                     //System.out.println(cadena);
                     txtInteres.setText(cadena);
-                    txtCantidad.requestFocus();      
+                    txtCantidad.requestFocus();
                 }
-                
-            }
-            else{
+
+            } else {
                 //System.out.println("El archivo no esta listo para ser leido...");
                 JOptionPane.showMessageDialog(null, "El archivo no esta listo para ser leido...");
             }
-            
-            
+
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             JOptionPane.showMessageDialog(null, "El archivo no esta listo para ser leido...");
+            
+            // codigo si no encuentra el archivo de texto
+            
         }
-        
 
-        
     }
 
     /**
@@ -113,6 +113,7 @@ public class frmInversionGBM extends javax.swing.JFrame {
             }
         });
 
+        cmdSalir.setMnemonic('S');
         cmdSalir.setText("Salir");
         cmdSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,6 +121,7 @@ public class frmInversionGBM extends javax.swing.JFrame {
             }
         });
 
+        cmdCalcular.setMnemonic('C');
         cmdCalcular.setText("Calcular");
         cmdCalcular.setToolTipText("Calcular Inversion");
         cmdCalcular.addActionListener(new java.awt.event.ActionListener() {
@@ -128,6 +130,7 @@ public class frmInversionGBM extends javax.swing.JFrame {
             }
         });
 
+        cmdLimpiar.setMnemonic('L');
         cmdLimpiar.setText("Limpiar");
         cmdLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -207,6 +210,7 @@ public class frmInversionGBM extends javax.swing.JFrame {
 
         jLabel6.setText("Interes");
 
+        cmdCambiarInteres.setMnemonic('B');
         cmdCambiarInteres.setText("Cambiar en BD");
         cmdCambiarInteres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,6 +218,7 @@ public class frmInversionGBM extends javax.swing.JFrame {
             }
         });
 
+        cmdManual.setMnemonic('M');
         cmdManual.setText("Manual");
         cmdManual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -325,39 +330,39 @@ public class frmInversionGBM extends javax.swing.JFrame {
         System.exit(0); //Salir del Programa
     }//GEN-LAST:event_cmdSalirActionPerformed
 
-    private void Calcular(){
-         NumberFormat formatoImporte = NumberFormat.getCurrencyInstance();
+    private void Calcular() {
+        NumberFormat formatoImporte = NumberFormat.getCurrencyInstance();
         // validamos que no esten vacios los campos
-        
+
         double interes = Double.parseDouble(txtInteres.getText());   //0.85
         int meses = 12;
         int dias = 30;
-        
-        while (txtCantidad.getText().isEmpty()) {            
+
+        while (txtCantidad.getText().isEmpty()) {
             //El campo esta vacio,
-            JOptionPane.showMessageDialog(null,"Cantidad Vacia");
-            
+            JOptionPane.showMessageDialog(null, "Cantidad Vacia");
+
             txtCantidad.requestFocus();
             txtCantidad.setText("0"); //ayuda a que el enter funcione en el inicio
             return;
         }
-        
-            //El campo tiene texto
-            // Calcular
-            double cantidadInvertida = Double.parseDouble(txtCantidad.getText());
-            
-            double cantidaAno = (cantidadInvertida * interes) / 10;
-            double cantidaMes = ((cantidadInvertida * interes) / 10)/meses;
-            double cantidaDia = ((cantidadInvertida * interes) / 10/meses)/dias;
 
-            //imprimir resultados
-            txtAno.setText(formatoImporte.format(cantidaAno));
-            txtMes.setText(formatoImporte.format(cantidaMes));
-            txtDia.setText(formatoImporte.format(cantidaDia));
+        //El campo tiene texto
+        // Calcular
+        double cantidadInvertida = Double.parseDouble(txtCantidad.getText());
 
-            lblCantidad.setText("Inversion: " + formatoImporte.format(cantidadInvertida));
-            txtCantidad.setText("");
-        
+        double cantidaAno = (cantidadInvertida * interes) / 10;
+        double cantidaMes = ((cantidadInvertida * interes) / 10) / meses;
+        double cantidaDia = ((cantidadInvertida * interes) / 10 / meses) / dias;
+
+        //imprimir resultados
+        txtAno.setText(formatoImporte.format(cantidaAno));
+        txtMes.setText(formatoImporte.format(cantidaMes));
+        txtDia.setText(formatoImporte.format(cantidaDia));
+
+        lblCantidad.setText("Inversion: " + formatoImporte.format(cantidadInvertida));
+        txtCantidad.setText("");
+
     }
     private void cmdCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCalcularActionPerformed
         Calcular();
@@ -375,7 +380,7 @@ public class frmInversionGBM extends javax.swing.JFrame {
         txtAno.setText("");
 
         txtCantidad.setText("");
-        
+
         txtCantidad.requestFocus();
 
     }//GEN-LAST:event_cmdLimpiarActionPerformed
@@ -390,8 +395,7 @@ public class frmInversionGBM extends javax.swing.JFrame {
 
         boolean numeros = key >= 46 && key <= 57;
 
-        if (!numeros)
-        {
+        if (!numeros) {
             evt.consume();
         }
 
@@ -407,8 +411,7 @@ public class frmInversionGBM extends javax.swing.JFrame {
 
         boolean numeros = key >= 46 && key <= 57;
 
-        if (!numeros)
-        {
+        if (!numeros) {
             evt.consume();
         }
         if (txtMes.getText().trim().length() == 10) {
@@ -423,8 +426,7 @@ public class frmInversionGBM extends javax.swing.JFrame {
 
         boolean numeros = key >= 46 && key <= 57;
 
-        if (!numeros)
-        {
+        if (!numeros) {
             evt.consume();
         }
         if (txtAno.getText().trim().length() == 10) {
@@ -438,8 +440,7 @@ public class frmInversionGBM extends javax.swing.JFrame {
 
         boolean numeros = key >= 46 && key <= 57;
 
-        if (!numeros)
-        {
+        if (!numeros) {
             evt.consume();
         }
 
@@ -454,12 +455,12 @@ public class frmInversionGBM extends javax.swing.JFrame {
 
     private void txtCantidadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyReleased
         // TODO add your handling code here:
-        if(evt.getKeyCode()== KeyEvent.VK_ENTER){
-    
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
             //cmdCalcular.doClick();
-            Calcular();     
+            Calcular();
         }
-        if(evt.getKeyCode()== KeyEvent.VK_ESCAPE){
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             System.exit(0);
         }
     }//GEN-LAST:event_txtCantidadKeyReleased
@@ -469,11 +470,10 @@ public class frmInversionGBM extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCantidadActionPerformed
 
     private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
-                if(evt.getKeyCode()== KeyEvent.VK_ESCAPE){
+        if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             //System.exit(0);
-           // cmdSalir.doClick();
-           
-           
+            // cmdSalir.doClick();
+
         }
     }//GEN-LAST:event_formKeyReleased
 
@@ -493,37 +493,48 @@ public class frmInversionGBM extends javax.swing.JFrame {
         // Boton de Cambiar Interes
         FileWriter archivo = null;
         PrintWriter escritor = null;
-        
+
         try {
             archivo = new FileWriter("C:/interes.txt");
             //archivo = new FileWriter("/interes.txt"); linux
             escritor = new PrintWriter(archivo);
-            
+
             double cantidad = Float.parseFloat(JOptionPane.showInputDialog("Digite el Interes Mensual"));
-            escritor.println(cantidad/10);
-            
+            escritor.println(cantidad / 10);
+
             archivo.close();
-            
-                    txtInteres.setText(String.valueOf(cantidad/10));
-                    txtCantidad.requestFocus();
-            
+
+            txtInteres.setText(String.valueOf(cantidad / 10));
+            txtCantidad.requestFocus();
+
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-        
-  
+
+
     }//GEN-LAST:event_cmdCambiarInteresActionPerformed
 
     private void cmdManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdManualActionPerformed
         // Boton de cambio manual de interes
         
-                    double cantidad = Float.parseFloat(JOptionPane.showInputDialog("Digite el Interes Mensual"));
-            //escritor.println(cantidad/10);
-            
-            //archivo.close();
-            
-                    txtInteres.setText(String.valueOf(cantidad/10));
-                    txtCantidad.requestFocus();
+        boolean repetir = true;
+
+        while (repetir ) {
+
+            try {
+                double cantidad = Float.parseFloat(JOptionPane.showInputDialog("Digite el Interes Mensual"));
+                
+                txtInteres.setText(String.valueOf(cantidad / 10));
+                txtCantidad.requestFocus();
+                repetir = false;
+
+            } catch (HeadlessException | NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Cadena ingresada, debe ingresar un valor numerico", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+
+            }
+
+        }
+
     }//GEN-LAST:event_cmdManualActionPerformed
 
     /**
@@ -560,7 +571,7 @@ public class frmInversionGBM extends javax.swing.JFrame {
             }
         });
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdCalcular;
     private javax.swing.JButton cmdCambiarInteres;
