@@ -30,7 +30,8 @@ public class frmInversionGBM extends javax.swing.JFrame {
         BufferedReader lector;
         
         try {
-            archivo = new FileReader("C:/interes.txt");
+            archivo = new FileReader("/interes.txt");
+            //archivo = new FileReader("C:/interes.txt"); linux
             if (archivo.ready()) {
                 lector = new BufferedReader(archivo);
                 String cadena;
@@ -246,7 +247,7 @@ public class frmInversionGBM extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtInteres, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(cmdCambiarInteres, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cmdCambiarInteres)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
@@ -290,7 +291,7 @@ public class frmInversionGBM extends javax.swing.JFrame {
                         .addComponent(cmdManual)
                         .addGap(18, 18, 18)
                         .addComponent(lblCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(11, Short.MAX_VALUE))))
+                        .addContainerGap(12, Short.MAX_VALUE))))
         );
 
         lblCantidad.getAccessibleContext().setAccessibleName("lblCantidad");
@@ -475,7 +476,8 @@ public class frmInversionGBM extends javax.swing.JFrame {
         PrintWriter escritor = null;
         
         try {
-            archivo = new FileWriter("C:/interes.txt");
+            archivo = new FileWriter("/interes.txt");
+            //archivo = new FileWriter("C:/interes.txt"); linux
             escritor = new PrintWriter(archivo);
             
             double cantidad = Float.parseFloat(JOptionPane.showInputDialog("Digite el Interes Mensual"));
