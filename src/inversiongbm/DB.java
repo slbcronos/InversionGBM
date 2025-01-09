@@ -47,6 +47,11 @@ public class DB extends javax.swing.JFrame {
         cmdLinux.setText("Linux");
 
         cmdWindows.setText("Windows");
+        cmdWindows.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdWindowsActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 14)); // NOI18N
         jLabel1.setText("Seleccione su Sistema Operativo para la Base de Datos");
@@ -94,6 +99,10 @@ public class DB extends javax.swing.JFrame {
         dispose();
 
     }//GEN-LAST:event_cmdSalirActionPerformed
+
+    private void cmdWindowsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdWindowsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmdWindowsActionPerformed
 
     /**
      * @param args the command line arguments
