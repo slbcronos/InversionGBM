@@ -27,50 +27,54 @@ public class frmInversionGBM extends javax.swing.JFrame {
     public frmInversionGBM() {
         initComponents();
 
-        FileReader archivo;
-        FileReader archivoMac;
+//        FileReader archivo;
+//        FileReader archivoMac;
+//
+//        BufferedReader lector;
+//        BufferedReader lector2;
+//
+//        try {
+//
+//            archivo = new FileReader("C:/interes.txt");
+//            archivoMac = new FileReader("/interes.txt");
+//            //archivo = new FileReader("/interes.txt"); linux
+//            if (archivo.ready()) {
+//                lector = new BufferedReader(archivo);
+//                String cadena;
+//
+//                while ((cadena = lector.readLine()) != null) {
+//
+//                    //System.out.println(cadena);
+//                    txtInteres.setText(cadena);
+//                    txtCantidad.requestFocus();
+//                }
+//            } else if (archivoMac.ready()) {
+//                lector2 = new BufferedReader(archivoMac);
+//                String cadena;
+//
+//                while ((cadena = lector2.readLine()) != null) {
+//
+//                    //System.out.println(cadena);
+//                    txtInteres.setText(cadena);
+//                    txtCantidad.requestFocus();
+//                }
+//
+//            } else {
+//                //System.out.println("El archivo no esta listo para ser leido...");
+//                JOptionPane.showMessageDialog(null, "El archivo no esta listo para ser leido...");
+//            }
+//
+//        } catch (Exception e) {
+//            System.out.println("Error: " + e.getMessage());
+//            JOptionPane.showMessageDialog(null, "El archivo no esta listo para ser leido...");
+//            
+//            // codigo si no encuentra el archivo de texto
+//            
+//        }
 
-        BufferedReader lector;
-        BufferedReader lector2;
-
-        try {
-
-            archivo = new FileReader("C:/interes.txt");
-            archivoMac = new FileReader("/interes.txt");
-            //archivo = new FileReader("/interes.txt"); linux
-            if (archivo.ready()) {
-                lector = new BufferedReader(archivo);
-                String cadena;
-
-                while ((cadena = lector.readLine()) != null) {
-
-                    //System.out.println(cadena);
-                    txtInteres.setText(cadena);
-                    txtCantidad.requestFocus();
-                }
-            } else if (archivoMac.ready()) {
-                lector2 = new BufferedReader(archivoMac);
-                String cadena;
-
-                while ((cadena = lector2.readLine()) != null) {
-
-                    //System.out.println(cadena);
-                    txtInteres.setText(cadena);
-                    txtCantidad.requestFocus();
-                }
-
-            } else {
-                //System.out.println("El archivo no esta listo para ser leido...");
-                JOptionPane.showMessageDialog(null, "El archivo no esta listo para ser leido...");
-            }
-
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-            JOptionPane.showMessageDialog(null, "El archivo no esta listo para ser leido...");
-            
-            // codigo si no encuentra el archivo de texto
-            
-        }
+        //activar boton manual
+        InteresManual();
+        
 
     }
 
@@ -212,6 +216,7 @@ public class frmInversionGBM extends javax.swing.JFrame {
 
         cmdCambiarInteres.setMnemonic('B');
         cmdCambiarInteres.setText("Cambiar en BD");
+        cmdCambiarInteres.setEnabled(false);
         cmdCambiarInteres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdCambiarInteresActionPerformed(evt);
@@ -515,9 +520,15 @@ public class frmInversionGBM extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdCambiarInteresActionPerformed
 
     private void cmdManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdManualActionPerformed
-        // Boton de cambio manual de interes
         
-        boolean repetir = true;
+        // Boton de cambio manual de interes
+        InteresManual();;
+       
+
+    }//GEN-LAST:event_cmdManualActionPerformed
+
+    private void InteresManual(){
+         boolean repetir = true;
 
         while (repetir ) {
 
@@ -534,9 +545,7 @@ public class frmInversionGBM extends javax.swing.JFrame {
             }
 
         }
-
-    }//GEN-LAST:event_cmdManualActionPerformed
-
+    }
     /**
      * @param args the command line arguments
      */
