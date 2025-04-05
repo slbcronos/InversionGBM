@@ -71,10 +71,8 @@ public class frmInversionGBM extends javax.swing.JFrame {
 //            // codigo si no encuentra el archivo de texto
 //            
 //        }
-
         //activar boton manual
         InteresManual();
-        
 
     }
 
@@ -520,24 +518,34 @@ public class frmInversionGBM extends javax.swing.JFrame {
     }//GEN-LAST:event_cmdCambiarInteresActionPerformed
 
     private void cmdManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdManualActionPerformed
-        
+
         // Boton de cambio manual de interes
         InteresManual();;
-       
+
 
     }//GEN-LAST:event_cmdManualActionPerformed
 
-    private void InteresManual(){
-         boolean repetir = true;
+    private void InteresManual() {
+        boolean repetir = true;
 
-        while (repetir ) {
+        while (repetir) {
 
             try {
-                double cantidad = Float.parseFloat(JOptionPane.showInputDialog("Digite el Interes Mensual"));
-                
-                txtInteres.setText(String.valueOf(cantidad / 10));
-                txtCantidad.requestFocus();
-                repetir = false;
+                // Esta era la linea original pero el boton de cnacelar no funcionaba
+                //double cantidad = Float.parseFloat(JOptionPane.showInputDialog("Digite el Interes Mensual",JOptionPane.YES_NO_OPTION));
+                String cantidad = JOptionPane.showInputDialog("Digite el Interes Mensual",JOptionPane.YES_NO_OPTION);
+
+                if ((cantidad != null) && (cantidad.length() > 0)) {
+
+                    txtInteres.setText(String.valueOf(Double.parseDouble(cantidad) / 10));
+                    txtCantidad.requestFocus();
+                    repetir = false;
+
+                } else {
+                    //System.out.println("mal");
+                    System.gc();
+                    System.exit(0); //Salir del Programa
+                }
 
             } catch (HeadlessException | NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Cadena ingresada, debe ingresar un valor numerico", "Informacion", JOptionPane.INFORMATION_MESSAGE);
@@ -546,6 +554,7 @@ public class frmInversionGBM extends javax.swing.JFrame {
 
         }
     }
+
     /**
      * @param args the command line arguments
      */
